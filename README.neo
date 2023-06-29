@@ -24,6 +24,13 @@ Usage
 h whatever
 
 
+-> p
+
+which will output the contents of:
+`~/.h-files/whatever.txt``
+
+
+
 -> h2
 
 Current Status
