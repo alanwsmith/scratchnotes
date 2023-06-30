@@ -50,33 +50,29 @@ s -h
 
 ## Current Status
 
+- [x] Make `~/.speednotes/notes` if it doesn't exist
 
-[x] Make `~/.speednotes/notes` if it doesn't exist
+- [x] Store files in `~/.speednotes/notes`
 
-[x] Store files in `~/.speednotes/notes`
+- [x] List out all files if the `s` command is run with no arguments
 
-[x] List out all files if the `s` command is
-run with no arguments
+- [x] Sort file listing
 
-[x] Sort file listing 
+- [x] Open files when the are called by name
 
-[] Open files when the are called by name
+- [x] Setup `-n notename` to make new files
 
-[] Remove: Setup `-e notename` to open the file in 
-the default editor
+- [x] Setup `-d notename` to remove files
 
-[x] Setup `-n notename` to make new files
-
-[x] Setup `-d notename` to remove files
-
-[x] Show a message if there are no notes in
+- [x] Show a message if there are no notes in
 the archive
 
-[x] Setup `-h` to display help (already built in)
+- [x] Setup `-h` to display help (already built in)
 
-[] Autocomplete file names from in the arguments 
+- [ ] Autocomplete file names from in the arguments
 
-[] Allow for spaces in file names
+- [ ] Allow for spaces in file names
+
 
 ## Installation
 
@@ -89,5 +85,4 @@ adding it to your path so you can use it:
 ```
 cargo install --path .
 ```
-
 
