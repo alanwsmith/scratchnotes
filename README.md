@@ -12,23 +12,23 @@ little cheat sheets and get to them quickly.
 
 ## Usage
 
+Read a file:
+
 ```
 h whatever
 ```
 
-And to create a new file (work in progress)
+Create a new file:
 
 ```
 h -n whatever
 ```
 
-
-which will output the contents of:
+Edit a file:
 
 ```
-~/.h-files/whatever.txt
+h -e whatever
 ```
-
 
 ## Current Status
 
@@ -50,7 +50,7 @@ already exist
 [] Setup `--edit whatever` to open the file in 
 the default editor
 
-[] Setup `--new whatever` to make new files
+[x] Setup `--new whatever` to make new files
 
 [] Setup `--delete whatever` to remove files
 

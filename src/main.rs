@@ -12,6 +12,8 @@ use clap::Parser;
 struct Args {
     #[arg(short, long)]
     new_file: Option<String>,
+    #[arg(short, long)]
+    edit_file: Option<String>,
     existing_file: Option<String>,
 }
 
