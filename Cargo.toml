@@ -1,6 +1,6 @@
 [package]
 name = "h"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 repository = "https://github.com/alanwsmith/h"
 
@@ -9,6 +9,7 @@ repository = "https://github.com/alanwsmith/h"
 [dependencies]
 clap = { version = "4.3.9", features = ["cargo"] }
 dirs = "5.0.1"
+walkdir = "2.3.3"
 
 # The profile that 'cargo dist' will build with
 [profile.dist]
