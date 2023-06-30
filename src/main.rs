@@ -1,20 +1,17 @@
-// use clap::command;
-// use clap::Arg;
-// use dirs;
+use clap::Parser;
 use std::fs;
 use std::path::PathBuf;
-use walkdir::DirEntry;
-use walkdir::WalkDir;
-
-use clap::Parser;
+use walkdir::{DirEntry, WalkDir};
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None) ]
 struct Args {
     #[arg(short, long)]
-    new: Option<String>,
+    delete: Option<String>,
     #[arg(short, long)]
     edit: Option<String>,
+    #[arg(short, long)]
+    new: Option<String>,
     file: Option<String>,
 }
 
@@ -23,27 +20,37 @@ fn main() {
     storage_dir.push(".speednotes/notes");
     verify_dir(&storage_dir);
     let args = Args::parse();
-
-    // match args.new {
-    //     Some(name) => {
-    //         make_new_file(storage_dir, name.clone());
-    //     }
-    //     None => {
-    //     }
-    // }
-
-    match (args.new, args.edit, args.file) {
-        (Some(name), None, None) => {
+    match (args.new, args.edit, args.delete, args.file) {
+        (Some(name), None, None, None) => {
             make_new_file(storage_dir, name);
         }
-        (None, Some(name), None) => edit_file(storage_dir, name),
-        (None, None, Some(name)) => show_file(storage_dir, name),
-        (None, None, None) => {
+        (None, Some(name), None, None) => edit_file(storage_dir, name),
+        (None, None, Some(name), None) => delete_file(storage_dir, name),
+        (None, None, None, Some(name)) => show_file(storage_dir, name),
+        (None, None, None, None) => {
             list_files(storage_dir);
         }
         _ => {
             show_help();
         }
+    }
+}
+
+fn delete_file(storage_dir: PathBuf, name: String) {
+    let mut file_path = storage_dir.clone();
+    file_path.push(name.clone());
+    file_path.set_extension("txt");
+    if file_path.exists() {
+        match fs::remove_file(file_path) {
+            Ok(_) => {
+                println!("Deleted: {}", name.as_str());
+            }
+            Err(_) => {
+                println!("Could not delete: {}", name.as_str());
+            }
+        }
+    } else {
+        println!("{} is already gone", name.as_str());
     }
 }
 

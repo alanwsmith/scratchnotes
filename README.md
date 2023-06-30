@@ -68,32 +68,23 @@ run with no arguments
 
 [x] Sort direcotry listing of existing files
 
-[] Show a file if an argument with the same name
+[x] Show a file if an argument with the same name
 is passed (e.g. `s notename` displays 
 `~/.speedfiles/notes/notename.txt`)
 
-[] Setup `-e notename` to open the file in 
+[x] Setup `-e notename` to open the file in 
 the default editor
 
 [x] Setup `-n notename` to make new files
 
-[] Setup `-d notename` to remove files
+[x] Setup `-d notename` to remove files
+
+[x] Show a message if there are no notes in
+the archive
 
 [] Setup `-h` to display help
 
 [] Autocomplete file names from in the arguments 
-
-[] Allow for typing in numbers to open a file
-based on the order of the listing
-
-[] Set the spacer lines equal to the longest
-line of text or the width of the terminal 
-(whichever is shortest)
-
-[] Show a message if there are no notes in
-the archive
-
-[] Alias `-o` to `-e`
 
 ## Installation
 
