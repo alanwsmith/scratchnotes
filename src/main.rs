@@ -25,7 +25,7 @@ fn main() {
             show_file(storage_dir, name);
         }
         (Some(name), None) => {
-            println!("make a new file: {}", name);
+            make_new_file(storage_dir, name.clone());
         }
         (Some(_), Some(_)) => {
             println!(
@@ -38,11 +38,23 @@ fn main() {
     }
 }
 
+fn make_new_file(storage_dir: PathBuf, name: String) {
+    let mut file_path = storage_dir.clone();
+    file_path.push(name.clone());
+    file_path.set_extension("txt");
+    if file_path.exists() {
+        println!("File {} already exists", name.clone());
+    } else {
+        let text = String::from("put your notes here");
+        fs::write(file_path, text).unwrap();
+        println!("Created file: {}", name.clone());
+    }
+}
+
 fn show_file(storage_dir: PathBuf, name: String) {
     let mut file_path = storage_dir.clone();
     file_path.push(name.clone());
     file_path.set_extension("txt");
-
     if file_path.exists() {
         let text = fs::read_to_string(file_path).unwrap();
         println!("-----------------------------------------");
