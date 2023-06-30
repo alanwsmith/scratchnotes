@@ -22,7 +22,6 @@ fn main() {
     let args = Args::parse();
     match (args.new_file, args.existing_file) {
         (None, Some(name)) => {
-            // println!("use exsting file: {}", name);
             show_file(storage_dir, name);
         }
         (Some(name), None) => {
@@ -34,7 +33,7 @@ fn main() {
             );
         }
         _ => {
-            println!("show file list");
+            list_files(storage_dir);
         }
     }
 }
@@ -87,20 +86,18 @@ fn show_file(storage_dir: PathBuf, name: String) {
 //     }
 // }
 
-fn verify_dir(dir: &PathBuf) -> bool {
-    if dir.exists() {
-        true
-    } else {
-        match fs::create_dir_all(dir) {
-            Ok(_) => true,
-            Err(_) => false,
-        }
-    }
-}
+// fn verify_dir(dir: &PathBuf) -> bool {
+//     if dir.exists() {
+//         true
+//     } else {
+//         match fs::create_dir_all(dir) {
+//             Ok(_) => true,
+//             Err(_) => false,
+//         }
+//     }
+// }
 
-pub fn list_files() {
-    let mut storage_dir = dirs::home_dir().unwrap();
-    storage_dir.push(".h-files");
+pub fn list_files(storage_dir: PathBuf) {
     for entry in WalkDir::new(storage_dir)
         .sort_by_file_name()
         .into_iter()
