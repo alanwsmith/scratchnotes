@@ -1,58 +1,71 @@
-# h 
+# speednotes
 
-(for your personal help files)
+Quick notes from the command line
 
 ## Overview
 
-This goal of this project is to make a simple command
-called `h`` that runs from the command line. It displays
-the content of text files. The idea is to make 
-little cheat sheets and get to them quickly.
-
+speednotes is a CRUD app for notes on the 
+command line. It's designed to be simple and
+quick. 
 
 ## Usage
 
-Read a file:
+speednotes does five things:
 
-```
-h whatever
-```
+### List notes
 
-Create a new file:
-
-```
-h -n whatever
+```bash
+s
 ```
 
-Edit a file:
+### Create a note 
 
+```bash
+s -n notename 
 ```
-h -e whatever
+
+### Read a note 
+
+```bash
+s notename 
 ```
+
+### Edit a note 
+
+```bash
+s -e notename 
+```
+
+### Delte a note 
+
+```bash
+s -d notename 
+```
+
 
 ## Current Status
 
 
-[x] Store files in `~/.h-files`` 
+[] Store files in `~/.speednotes/notes`` 
 
-[x] Show a file if an argument with the same name
-is passed (e.g. `h whatever`` displays 
-`~/.h-files/whatever.txt``)
+[] Show a file if an argument with the same name
+is passed (e.g. `s notename`` displays 
+`~/.speedfiles/notes/notename.txt``)
 
-[x] List out all files if the `h`` command is
+[] List out all files if the `speednotes`` command is
 run with no arguments
 
-[x] make the ~/.h-files directory if it doesn't 
+[] make the ~/.speednotes directory if it doesn't 
 already exist
 
-[x] Sort direcotry listing of existing files
+[] Sort direcotry listing of existing files
 
-[] Setup `--edit whatever` to open the file in 
+[] Setup `-e notename` to open the file in 
 the default editor
 
-[x] Setup `--new whatever` to make new files
+[] Setup `-n notename` to make new files
 
-[] Setup `--delete whatever` to remove files
+[] Setup `-d notename` to remove files
 
 [] Autocomplete file names from in the arguments 
 
@@ -62,6 +75,7 @@ based on the order of the listing
 [] Set the spacer lines equal to the longest
 line of text or the width of the terminal 
 (whichever is shortest)
+
 
 ## Installation
 
