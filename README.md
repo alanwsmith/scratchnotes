@@ -16,22 +16,13 @@ quick.
 s
 ```
 
-### Read/Edit a note 
-
+### Open/Create a note 
 
 ```bash
 s notename 
 ```
 
-### Create a note 
-
-
-```bash
-s -n notename 
-```
-
 ### Delte a note 
-
 
 ```bash
 s -d notename 
@@ -53,13 +44,13 @@ s -h
 
 - [x] Sort file listing
 
+- [x] Show a message if there are no notes in the archive
+
 - [x] Open files when the are called by name
 
-- [x] Setup `-n notename` to make new files
+- [x] If a file doesn't exist, ask if you want to create it
 
 - [x] Setup `-d notename` to remove files
-
-- [x] Show a message if there are no notes in the archive
 
 - [x] Setup `-h` to display help (already built in)
 

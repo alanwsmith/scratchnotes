@@ -1,4 +1,5 @@
 use clap::Parser;
+use dialoguer::Confirm;
 use std::fs;
 use std::path::PathBuf;
 use walkdir::{DirEntry, WalkDir};
@@ -8,8 +9,6 @@ use walkdir::{DirEntry, WalkDir};
 struct Args {
     #[arg(short, long)]
     delete: Option<String>,
-    #[arg(short, long)]
-    new: Option<String>,
     file: Option<String>,
 }
 
@@ -18,13 +17,30 @@ fn main() {
     storage_dir.push(".speednotes/notes");
     verify_dir(&storage_dir);
     let args = Args::parse();
-    match (args.new, args.delete, args.file) {
-        (Some(name), None, None) => make_file(storage_dir, name),
-        (None, Some(name), None) => delete_file(storage_dir, name),
-        (None, None, Some(name)) => edit_file(storage_dir, name),
-        (None, None, None) => list_files(storage_dir),
+    match (args.delete, args.file) {
+        (Some(name), None) => delete_file(storage_dir, name),
+        (None, Some(name)) => edit_file(storage_dir, name),
+        (None, None) => list_files(storage_dir),
         _ => {
             println!("Invalid command. You can only pass one option");
+        }
+    }
+}
+
+fn ask_to_make_file(file_path: PathBuf) {
+    match Confirm::new()
+        .with_prompt("That file doesn't exist. Do you want to make it?")
+        .interact()
+    {
+        Ok(status) => {
+            if status == true {
+                let _ = edit::edit_file(file_path);
+            } else {
+                println!("ok, no file created");
+            }
+        }
+        Err(err) => {
+            println!("{}", err)
         }
     }
 }
@@ -54,7 +70,7 @@ fn edit_file(storage_dir: PathBuf, name: String) {
     if file_path.exists() {
         let _ = edit::edit_file(file_path);
     } else {
-        println!("No file for: {}", name.as_str());
+        ask_to_make_file(file_path);
     }
 }
 
@@ -84,13 +100,6 @@ pub fn list_files(storage_dir: PathBuf) {
         println!("");
     }
     println!("-----------------------------------------");
-}
-
-fn make_file(storage_dir: PathBuf, name: String) {
-    let mut file_path = storage_dir.clone();
-    file_path.push(name.clone());
-    file_path.set_extension("md");
-    let _ = edit::edit_file(file_path);
 }
 
 fn verify_dir(dir: &PathBuf) -> bool {
