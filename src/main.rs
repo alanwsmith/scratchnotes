@@ -3,6 +3,7 @@
 // use dirs;
 use std::fs;
 use std::path::PathBuf;
+use walkdir::DirEntry;
 use walkdir::WalkDir;
 
 use clap::Parser;
@@ -12,15 +13,15 @@ use clap::Parser;
 struct Args {
     #[arg(short, long)]
     new_file: Option<String>,
-    #[arg(short, long)]
-    edit_file: Option<String>,
+    // #[arg(short, long)]
+    // edit_file: Option<String>,
     existing_file: Option<String>,
 }
 
 fn main() {
     let mut storage_dir = dirs::home_dir().unwrap();
-    storage_dir.push(".h-files");
-
+    storage_dir.push(".speednotes/notes");
+    verify_dir(&storage_dir);
     let args = Args::parse();
     match (args.new_file, args.existing_file) {
         (None, Some(name)) => {
@@ -31,7 +32,7 @@ fn main() {
         }
         (Some(_), Some(_)) => {
             println!(
-                "Got both a new and existing file. You can only send one. Check --help for details"
+                "Got both a new and existing file.\nYou can only send one.\nCheck --help for details"
             );
         }
         _ => {
@@ -65,58 +66,44 @@ fn show_file(storage_dir: PathBuf, name: String) {
     }
 }
 
-// fn main() {
-//     let mut storage_dir = dirs::home_dir().unwrap();
-//     storage_dir.push(".h-files");
-//     match verify_dir(&storage_dir) {
-//         true => {
-//             let matches = command!().arg(Arg::new("file")).get_matches();
-//             match matches.get_one::<String>("file") {
-//                 Some(f) => {
-//                     let mut file_path = storage_dir.clone();
-//                     file_path.push(f);
-//                     file_path.set_extension("txt");
-//                     if file_path.exists() {
-//                         let text = fs::read_to_string(file_path).unwrap();
-//                         println!("-----------------------------------------");
-//                         println!("{}", text);
-//                         println!("-----------------------------------------");
-//                     } else {
-//                         println!("No file for: {}", f);
-//                     }
-//                 }
-//                 None => {
-//                     println!("Existing files:");
-//                     list_files();
-//                 }
-//             }
-//         }
-//         false => {
-//             println!("Could not make storage directory");
-//             println!("{}", storage_dir.display());
-//         }
-//     }
-// }
-
-// fn verify_dir(dir: &PathBuf) -> bool {
-//     if dir.exists() {
-//         true
-//     } else {
-//         match fs::create_dir_all(dir) {
-//             Ok(_) => true,
-//             Err(_) => false,
-//         }
-//     }
-// }
+fn verify_dir(dir: &PathBuf) -> bool {
+    if dir.exists() {
+        true
+    } else {
+        match fs::create_dir_all(dir) {
+            Ok(_) => true,
+            Err(_) => false,
+        }
+    }
+}
 
 pub fn list_files(storage_dir: PathBuf) {
-    for entry in WalkDir::new(storage_dir)
+    let entries = WalkDir::new(storage_dir)
         .sort_by_file_name()
         .into_iter()
-        .filter_map(|e| e.ok())
-    {
-        if entry.path().is_file() {
-            println!("{}", entry.path().file_stem().unwrap().to_str().unwrap());
-        }
+        .filter_map(|e| {
+            if e.as_ref().unwrap().path().is_file() {
+                e.ok()
+            } else {
+                None
+            }
+        })
+        .into_iter()
+        .collect::<Vec<DirEntry>>();
+    if &entries.len() > &0 {
+        println!("-----------------------------------------");
+        println!("Your notes:");
+        entries
+            .iter()
+            .for_each(|entry| println!("{}", entry.path().file_stem().unwrap().to_str().unwrap()));
+        println!("-----------------------------------------");
+    } else {
+        println!("-----------------------------------------");
+        println!("You don't have any notes. Make a new");
+        println!("one with:");
+        println!("");
+        println!("    s -n notename");
+        println!("");
+        println!("-----------------------------------------");
     }
 }

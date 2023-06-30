@@ -10,27 +10,31 @@ quick.
 
 ## Usage
 
-speednotes does five things:
-
 ### List notes
 
 ```bash
 s
 ```
 
-### Create a note 
-
-```bash
-s -n notename 
-```
-
 ### Read a note 
+
+(not yet implemented)
 
 ```bash
 s notename 
 ```
 
+### Create a note 
+
+(not yet implemented)
+
+```bash
+s -n notename 
+```
+
 ### Edit a note 
+
+(not yet implemented)
 
 ```bash
 s -e notename 
@@ -38,27 +42,35 @@ s -e notename
 
 ### Delte a note 
 
+(not yet implemented)
+
 ```bash
 s -d notename 
 ```
 
+### View help 
+
+(not yet implemented)
+
+```bash
+s -h
+```
 
 ## Current Status
 
 
-[] Store files in `~/.speednotes/notes`` 
+[x] Store files in `~/.speednotes/notes`
 
-[] Show a file if an argument with the same name
-is passed (e.g. `s notename`` displays 
-`~/.speedfiles/notes/notename.txt``)
+[x] Make `~/.speednotes/notes` if it doesn't exist
 
-[] List out all files if the `speednotes`` command is
+[x] List out all files if the `speednotes` command is
 run with no arguments
 
-[] make the ~/.speednotes directory if it doesn't 
-already exist
+[x] Sort direcotry listing of existing files
 
-[] Sort direcotry listing of existing files
+[] Show a file if an argument with the same name
+is passed (e.g. `s notename` displays 
+`~/.speedfiles/notes/notename.txt`)
 
 [] Setup `-e notename` to open the file in 
 the default editor
@@ -66,6 +78,8 @@ the default editor
 [] Setup `-n notename` to make new files
 
 [] Setup `-d notename` to remove files
+
+[] Setup `-h` to display help
 
 [] Autocomplete file names from in the arguments 
 
@@ -76,6 +90,10 @@ based on the order of the listing
 line of text or the width of the terminal 
 (whichever is shortest)
 
+[] Show a message if there are no notes in
+the archive
+
+[] Alias `-o` to `-e`
 
 ## Installation
 
