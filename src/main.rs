@@ -16,11 +16,14 @@ struct Args {
 }
 
 fn main() {
-    let args = Args::parse();
+    let mut storage_dir = dirs::home_dir().unwrap();
+    storage_dir.push(".h-files");
 
+    let args = Args::parse();
     match (args.new_file, args.existing_file) {
         (None, Some(name)) => {
-            println!("use exsting file: {}", name);
+            // println!("use exsting file: {}", name);
+            show_file(storage_dir, name);
         }
         (Some(name), None) => {
             println!("make a new file: {}", name);
@@ -33,6 +36,21 @@ fn main() {
         _ => {
             println!("show file list");
         }
+    }
+}
+
+fn show_file(storage_dir: PathBuf, name: String) {
+    let mut file_path = storage_dir.clone();
+    file_path.push(name.clone());
+    file_path.set_extension("txt");
+
+    if file_path.exists() {
+        let text = fs::read_to_string(file_path).unwrap();
+        println!("-----------------------------------------");
+        println!("{}", text);
+        println!("-----------------------------------------");
+    } else {
+        println!("No file for: {}", name.as_str());
     }
 }
 
