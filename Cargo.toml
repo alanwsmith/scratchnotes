@@ -8,6 +8,7 @@ repository = "https://github.com/alanwsmith/speednotes"
 
 [dependencies]
 clap = { version = "4.3.9", features = ["cargo", "derive"] }
+dialoguer = "0.10.4"
 dirs = "5.0.1"
 edit = "0.1.4"
 walkdir = "2.3.3"

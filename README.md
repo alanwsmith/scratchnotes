@@ -18,20 +18,17 @@ s
 
 ### Read/Edit a note 
 
-
 ```bash
 s notename 
 ```
 
 ### Create a note 
 
-
 ```bash
 s -n notename 
 ```
 
 ### Delte a note 
-
 
 ```bash
 s -d notename 
@@ -63,9 +60,12 @@ s -h
 
 - [x] Setup `-h` to display help (already built in)
 
+- [ ] If a file doesn't exist, as if you want to create it
+
 - [ ] Autocomplete file names from in the arguments
 
 - [ ] Allow for spaces in file names
+
 
 
 ## Installation
