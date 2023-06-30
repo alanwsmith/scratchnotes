@@ -82,9 +82,11 @@ the default editor
 [x] Show a message if there are no notes in
 the archive
 
-[] Setup `-h` to display help
+[x] Setup `-h` to display help (already built in)
 
 [] Autocomplete file names from in the arguments 
+
+[] Allow for spaces in file names
 
 ## Installation
 
