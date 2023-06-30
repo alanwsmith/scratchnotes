@@ -1,52 +1,77 @@
-# h 
+# speednotes
 
-(for your personal help files)
+Quick notes from the command line
 
 ## Overview
 
-This goal of this project is to make a simple command
-called `h`` that runs from the command line. It displays
-the content of text files. The idea is to make 
-little cheat sheets and get to them quickly.
-
+speednotes is a CRUD app for notes on the 
+command line. It's designed to be simple and
+quick. 
 
 ## Usage
 
-```
-h whatever
+### List notes
+
+```bash
+s
 ```
 
-which will output the contents of:
+### Read/Edit a note 
 
-```
-~/.h-files/whatever.txt
+(not yet implemented)
+
+```bash
+s notename 
 ```
 
+### Create a note 
+
+(not yet implemented)
+
+```bash
+s -n notename 
+```
+
+### Delte a note 
+
+(not yet implemented)
+
+```bash
+s -d notename 
+```
+
+### View help 
+
+(not yet implemented)
+
+```bash
+s -h
+```
 
 ## Current Status
 
+- [x] Make `~/.speednotes/notes` if it doesn't exist
 
-- [x] Store files in `~/.h-files` 
+- [x] Store files in `~/.speednotes/notes`
 
-- [x] Show a file if an argument with the same name is passed (e.g. `h whatever` displays `~/.h-files/whatever.txt`)
+- [x] List out all files if the `s` command is run with no arguments
 
-- [x] List out all files if the `h` command is run with no arguments
+- [x] Sort file listing
 
-- [x] make the ~/.h-files directory if it doesn't already exist
+- [x] Open files when the are called by name
 
-- [ ] Sort directory listing of existing files
+- [x] Setup `-n notename` to make new files
 
-- [ ] Setup `--edit whatever` to open the file in the default editor
+- [x] Setup `-d notename` to remove files
 
-- [ ] Setup `--new whatever` to make new files
+- [x] Show a message if there are no notes in
+the archive
 
-- [ ] Setup `--delete whatever` to remove files
+- [x] Setup `-h` to display help (already built in)
 
-- [ ] Set the spacer lines equal to the longest line of text or the width of the terminal (whichever is shortest)
+- [ ] Autocomplete file names from in the arguments
 
-- [ ] Autocomplete file names from in the arguments 
-
-- [ ] Allow for typing in numbers to open a file based on the order of the listing
+- [ ] Allow for spaces in file names
 
 
 ## Installation
