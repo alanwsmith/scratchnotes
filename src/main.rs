@@ -32,7 +32,7 @@ fn main() {
 fn delete_file(storage_dir: PathBuf, name: String) {
     let mut file_path = storage_dir.clone();
     file_path.push(name.clone());
-    file_path.set_extension("txt");
+    file_path.set_extension("md");
     if file_path.exists() {
         match fs::remove_file(file_path) {
             Ok(_) => {
@@ -50,7 +50,7 @@ fn delete_file(storage_dir: PathBuf, name: String) {
 fn edit_file(storage_dir: PathBuf, name: String) {
     let mut file_path = storage_dir.clone();
     file_path.push(name.clone());
-    file_path.set_extension("txt");
+    file_path.set_extension("md");
     if file_path.exists() {
         let _ = edit::edit_file(file_path);
     } else {
@@ -89,7 +89,7 @@ pub fn list_files(storage_dir: PathBuf) {
 fn make_file(storage_dir: PathBuf, name: String) {
     let mut file_path = storage_dir.clone();
     file_path.push(name.clone());
-    file_path.set_extension("txt");
+    file_path.set_extension("md");
     let _ = edit::edit_file(file_path);
 }
 

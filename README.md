@@ -18,7 +18,6 @@ s
 
 ### Read/Edit a note 
 
-(not yet implemented)
 
 ```bash
 s notename 
@@ -26,7 +25,6 @@ s notename
 
 ### Create a note 
 
-(not yet implemented)
 
 ```bash
 s -n notename 
@@ -34,15 +32,12 @@ s -n notename
 
 ### Delte a note 
 
-(not yet implemented)
 
 ```bash
 s -d notename 
 ```
 
 ### View help 
-
-(not yet implemented)
 
 ```bash
 s -h
@@ -64,8 +59,7 @@ s -h
 
 - [x] Setup `-d notename` to remove files
 
-- [x] Show a message if there are no notes in
-the archive
+- [x] Show a message if there are no notes in the archive
 
 - [x] Setup `-h` to display help (already built in)
 
