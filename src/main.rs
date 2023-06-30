@@ -12,10 +12,10 @@ use clap::Parser;
 #[command(author, version, about, long_about = None) ]
 struct Args {
     #[arg(short, long)]
-    new_file: Option<String>,
-    // #[arg(short, long)]
-    // edit_file: Option<String>,
-    existing_file: Option<String>,
+    new: Option<String>,
+    #[arg(short, long)]
+    edit: Option<String>,
+    file: Option<String>,
 }
 
 fn main() {
@@ -23,22 +23,43 @@ fn main() {
     storage_dir.push(".speednotes/notes");
     verify_dir(&storage_dir);
     let args = Args::parse();
-    match (args.new_file, args.existing_file) {
-        (None, Some(name)) => {
-            show_file(storage_dir, name);
+
+    // match args.new {
+    //     Some(name) => {
+    //         make_new_file(storage_dir, name.clone());
+    //     }
+    //     None => {
+    //     }
+    // }
+
+    match (args.new, args.edit, args.file) {
+        (Some(name), None, None) => {
+            make_new_file(storage_dir, name);
         }
-        (Some(name), None) => {
-            make_new_file(storage_dir, name.clone());
-        }
-        (Some(_), Some(_)) => {
-            println!(
-                "Got both a new and existing file.\nYou can only send one.\nCheck --help for details"
-            );
-        }
-        _ => {
+        (None, Some(name), None) => edit_file(storage_dir, name),
+        (None, None, Some(name)) => show_file(storage_dir, name),
+        (None, None, None) => {
             list_files(storage_dir);
         }
+        _ => {
+            show_help();
+        }
     }
+}
+
+fn edit_file(storage_dir: PathBuf, name: String) {
+    let mut file_path = storage_dir.clone();
+    file_path.push(name.clone());
+    file_path.set_extension("txt");
+    if file_path.exists() {
+        let _ = edit::edit_file(file_path);
+    } else {
+        println!("No file for: {}", name.as_str());
+    }
+}
+
+fn show_help() {
+    println!("TODO: Show help here");
 }
 
 fn make_new_file(storage_dir: PathBuf, name: String) {

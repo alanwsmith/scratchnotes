@@ -75,7 +75,7 @@ is passed (e.g. `s notename` displays
 [] Setup `-e notename` to open the file in 
 the default editor
 
-[] Setup `-n notename` to make new files
+[x] Setup `-n notename` to make new files
 
 [] Setup `-d notename` to remove files
 
