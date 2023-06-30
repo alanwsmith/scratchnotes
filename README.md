@@ -26,25 +26,35 @@ which will output the contents of:
 ## Current Status
 
 
-[x] store files in `~/.h-files`` 
+[x] Store files in `~/.h-files`` 
 
-[x] show `~/.h-files/default.txt`` if no arguments
-are passed to the command
-
-[x] show a file if an argument with the same name
+[x] Show a file if an argument with the same name
 is passed (e.g. `h whatever`` displays 
-`~/.h-files/whatever.txt``
+`~/.h-files/whatever.txt``)
 
-[] update to list out all files if the `h`` command is
-run by itself
+[x] List out all files if the `h`` command is
+run with no arguments
 
-[] setup a way to open the files in an editor
-(e.g. `h --edit whatever``)
-
-[] autocomplete file names from in the arguments 
-
-[] make the ~/.h-files directory if it doesn't 
+[x] make the ~/.h-files directory if it doesn't 
 already exist
+
+[] Sort direcotry listing of existing files
+
+[] Setup `--edit whatever` to open the file in 
+the default editor
+
+[] Setup `--new whatever` to make new files
+
+[] Setup `--delete whatever` to remove files
+
+[] Set the spacer lines equal to the longest
+line of text or the width of the terminal 
+(whichever is shortest)
+
+[] Autocomplete file names from in the arguments 
+
+[] Allow for typing in numbers to open a file
+based on the order of the listing
 
 
 ## Installation
