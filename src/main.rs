@@ -45,9 +45,7 @@ fn make_new_file(storage_dir: PathBuf, name: String) {
     if file_path.exists() {
         println!("File {} already exists", name.clone());
     } else {
-        let text = String::from("put your notes here");
-        fs::write(file_path, text).unwrap();
-        println!("Created file: {}", name.clone());
+        let _ = edit::edit_file(file_path);
     }
 }
 
