@@ -12,16 +12,23 @@ little cheat sheets and get to them quickly.
 
 ## Usage
 
+Read a file:
+
 ```
 h whatever
 ```
 
-which will output the contents of:
+Create a new file:
 
 ```
-~/.h-files/whatever.txt
+h -n whatever
 ```
 
+Edit a file:
+
+```
+h -e whatever
+```
 
 ## Current Status
 
@@ -38,24 +45,23 @@ run with no arguments
 [x] make the ~/.h-files directory if it doesn't 
 already exist
 
-[] Sort direcotry listing of existing files
+[x] Sort direcotry listing of existing files
 
 [] Setup `--edit whatever` to open the file in 
 the default editor
 
-[] Setup `--new whatever` to make new files
+[x] Setup `--new whatever` to make new files
 
 [] Setup `--delete whatever` to remove files
-
-[] Set the spacer lines equal to the longest
-line of text or the width of the terminal 
-(whichever is shortest)
 
 [] Autocomplete file names from in the arguments 
 
 [] Allow for typing in numbers to open a file
 based on the order of the listing
 
+[] Set the spacer lines equal to the longest
+line of text or the width of the terminal 
+(whichever is shortest)
 
 ## Installation
 
