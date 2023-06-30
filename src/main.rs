@@ -9,8 +9,6 @@ struct Args {
     #[arg(short, long)]
     delete: Option<String>,
     #[arg(short, long)]
-    edit: Option<String>,
-    #[arg(short, long)]
     new: Option<String>,
     file: Option<String>,
 }
@@ -20,18 +18,13 @@ fn main() {
     storage_dir.push(".speednotes/notes");
     verify_dir(&storage_dir);
     let args = Args::parse();
-    match (args.new, args.edit, args.delete, args.file) {
-        (Some(name), None, None, None) => {
-            make_new_file(storage_dir, name);
-        }
-        (None, Some(name), None, None) => edit_file(storage_dir, name),
-        (None, None, Some(name), None) => delete_file(storage_dir, name),
-        (None, None, None, Some(name)) => show_file(storage_dir, name),
-        (None, None, None, None) => {
-            list_files(storage_dir);
-        }
+    match (args.new, args.delete, args.file) {
+        (Some(name), None, None) => make_file(storage_dir, name),
+        (None, Some(name), None) => delete_file(storage_dir, name),
+        (None, None, Some(name)) => edit_file(storage_dir, name),
+        (None, None, None) => list_files(storage_dir),
         _ => {
-            show_help();
+            println!("Invalid command. You can only pass one option");
         }
     }
 }
@@ -65,46 +58,6 @@ fn edit_file(storage_dir: PathBuf, name: String) {
     }
 }
 
-fn show_help() {
-    println!("TODO: Show help here");
-}
-
-fn make_new_file(storage_dir: PathBuf, name: String) {
-    let mut file_path = storage_dir.clone();
-    file_path.push(name.clone());
-    file_path.set_extension("txt");
-    if file_path.exists() {
-        println!("File {} already exists", name.clone());
-    } else {
-        let _ = edit::edit_file(file_path);
-    }
-}
-
-fn show_file(storage_dir: PathBuf, name: String) {
-    let mut file_path = storage_dir.clone();
-    file_path.push(name.clone());
-    file_path.set_extension("txt");
-    if file_path.exists() {
-        let text = fs::read_to_string(file_path).unwrap();
-        println!("-----------------------------------------");
-        println!("{}", text);
-        println!("-----------------------------------------");
-    } else {
-        println!("No file for: {}", name.as_str());
-    }
-}
-
-fn verify_dir(dir: &PathBuf) -> bool {
-    if dir.exists() {
-        true
-    } else {
-        match fs::create_dir_all(dir) {
-            Ok(_) => true,
-            Err(_) => false,
-        }
-    }
-}
-
 pub fn list_files(storage_dir: PathBuf) {
     let entries = WalkDir::new(storage_dir)
         .sort_by_file_name()
@@ -118,20 +71,35 @@ pub fn list_files(storage_dir: PathBuf) {
         })
         .into_iter()
         .collect::<Vec<DirEntry>>();
+    println!("-----------------------------------------");
     if &entries.len() > &0 {
-        println!("-----------------------------------------");
         println!("Your notes:");
         entries
             .iter()
             .for_each(|entry| println!("{}", entry.path().file_stem().unwrap().to_str().unwrap()));
-        println!("-----------------------------------------");
     } else {
-        println!("-----------------------------------------");
-        println!("You don't have any notes. Make a new");
-        println!("one with:");
+        println!("You don't have any notes. Make one with:");
         println!("");
         println!("    s -n notename");
         println!("");
-        println!("-----------------------------------------");
+    }
+    println!("-----------------------------------------");
+}
+
+fn make_file(storage_dir: PathBuf, name: String) {
+    let mut file_path = storage_dir.clone();
+    file_path.push(name.clone());
+    file_path.set_extension("txt");
+    let _ = edit::edit_file(file_path);
+}
+
+fn verify_dir(dir: &PathBuf) -> bool {
+    if dir.exists() {
+        true
+    } else {
+        match fs::create_dir_all(dir) {
+            Ok(_) => true,
+            Err(_) => false,
+        }
     }
 }

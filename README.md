@@ -16,7 +16,7 @@ quick.
 s
 ```
 
-### Read a note 
+### Read/Edit a note 
 
 (not yet implemented)
 
@@ -30,14 +30,6 @@ s notename
 
 ```bash
 s -n notename 
-```
-
-### Edit a note 
-
-(not yet implemented)
-
-```bash
-s -e notename 
 ```
 
 ### Delte a note 
@@ -59,20 +51,18 @@ s -h
 ## Current Status
 
 
-[x] Store files in `~/.speednotes/notes`
-
 [x] Make `~/.speednotes/notes` if it doesn't exist
 
-[x] List out all files if the `speednotes` command is
+[x] Store files in `~/.speednotes/notes`
+
+[x] List out all files if the `s` command is
 run with no arguments
 
-[x] Sort direcotry listing of existing files
+[x] Sort file listing 
 
-[x] Show a file if an argument with the same name
-is passed (e.g. `s notename` displays 
-`~/.speedfiles/notes/notename.txt`)
+[] Open files when the are called by name
 
-[x] Setup `-e notename` to open the file in 
+[] Remove: Setup `-e notename` to open the file in 
 the default editor
 
 [x] Setup `-n notename` to make new files
