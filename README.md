@@ -34,7 +34,7 @@ which will output the contents of:
 
 - [x] make the ~/.h-files directory if it doesn't already exist
 
-- [ ] Sort direcotry listing of existing files
+- [ ] Sort directory listing of existing files
 
 - [ ] Setup `--edit whatever` to open the file in the default editor
 
