@@ -1,42 +1,73 @@
-use clap::command;
-use clap::Arg;
-use dirs;
+// use clap::command;
+// use clap::Arg;
+// use dirs;
 use std::fs;
 use std::path::PathBuf;
 use walkdir::WalkDir;
 
+use clap::Parser;
+
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None) ]
+struct Args {
+    #[arg(short, long)]
+    new_file: Option<String>,
+    existing_file: Option<String>,
+}
+
 fn main() {
-    let mut storage_dir = dirs::home_dir().unwrap();
-    storage_dir.push(".h-files");
-    match verify_dir(&storage_dir) {
-        true => {
-            let matches = command!().arg(Arg::new("file")).get_matches();
-            match matches.get_one::<String>("file") {
-                Some(f) => {
-                    let mut file_path = storage_dir.clone();
-                    file_path.push(f);
-                    file_path.set_extension("txt");
-                    if file_path.exists() {
-                        let text = fs::read_to_string(file_path).unwrap();
-                        println!("-----------------------------------------");
-                        println!("{}", text);
-                        println!("-----------------------------------------");
-                    } else {
-                        println!("No file for: {}", f);
-                    }
-                }
-                None => {
-                    println!("Existing files:");
-                    list_files();
-                }
-            }
+    let args = Args::parse();
+
+    match (args.new_file, args.existing_file) {
+        (None, Some(name)) => {
+            println!("use exsting file: {}", name);
         }
-        false => {
-            println!("Could not make storage directory");
-            println!("{}", storage_dir.display());
+        (Some(name), None) => {
+            println!("make a new file: {}", name);
+        }
+        (Some(_), Some(_)) => {
+            println!(
+                "Got both a new and existing file. You can only send one. Check --help for details"
+            );
+        }
+        _ => {
+            println!("show file list");
         }
     }
 }
+
+// fn main() {
+//     let mut storage_dir = dirs::home_dir().unwrap();
+//     storage_dir.push(".h-files");
+//     match verify_dir(&storage_dir) {
+//         true => {
+//             let matches = command!().arg(Arg::new("file")).get_matches();
+//             match matches.get_one::<String>("file") {
+//                 Some(f) => {
+//                     let mut file_path = storage_dir.clone();
+//                     file_path.push(f);
+//                     file_path.set_extension("txt");
+//                     if file_path.exists() {
+//                         let text = fs::read_to_string(file_path).unwrap();
+//                         println!("-----------------------------------------");
+//                         println!("{}", text);
+//                         println!("-----------------------------------------");
+//                     } else {
+//                         println!("No file for: {}", f);
+//                     }
+//                 }
+//                 None => {
+//                     println!("Existing files:");
+//                     list_files();
+//                 }
+//             }
+//         }
+//         false => {
+//             println!("Could not make storage directory");
+//             println!("{}", storage_dir.display());
+//         }
+//     }
+// }
 
 fn verify_dir(dir: &PathBuf) -> bool {
     if dir.exists() {

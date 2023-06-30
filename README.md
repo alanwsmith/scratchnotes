@@ -16,6 +16,13 @@ little cheat sheets and get to them quickly.
 h whatever
 ```
 
+And to create a new file (work in progress)
+
+```
+h -n whatever
+```
+
+
 which will output the contents of:
 
 ```
@@ -38,7 +45,7 @@ run with no arguments
 [x] make the ~/.h-files directory if it doesn't 
 already exist
 
-[] Sort direcotry listing of existing files
+[x] Sort direcotry listing of existing files
 
 [] Setup `--edit whatever` to open the file in 
 the default editor
@@ -47,15 +54,14 @@ the default editor
 
 [] Setup `--delete whatever` to remove files
 
-[] Set the spacer lines equal to the longest
-line of text or the width of the terminal 
-(whichever is shortest)
-
 [] Autocomplete file names from in the arguments 
 
 [] Allow for typing in numbers to open a file
 based on the order of the listing
 
+[] Set the spacer lines equal to the longest
+line of text or the width of the terminal 
+(whichever is shortest)
 
 ## Installation
 
