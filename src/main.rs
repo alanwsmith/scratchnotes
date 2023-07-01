@@ -14,7 +14,7 @@ struct Args {
 
 fn main() {
     let mut storage_dir = dirs::home_dir().unwrap();
-    storage_dir.push(".speednotes/notes");
+    storage_dir.push(".scratchnotes/notes");
     verify_dir(&storage_dir);
     let args = Args::parse();
     match (args.delete, args.file) {

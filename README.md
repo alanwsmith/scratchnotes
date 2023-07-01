@@ -1,10 +1,10 @@
-# speednotes
+# scratchnotes 
 
 Quick notes from the command line
 
 ## Overview
 
-speednotes is a CRUD app for notes on the 
+scratchnotes is a CRUD app for notes on the 
 command line. It's designed to be simple and
 quick. 
 
@@ -36,9 +36,9 @@ s -h
 
 ## Current Status
 
-- [x] Make `~/.speednotes/notes` if it doesn't exist
+- [x] Make `~/.scratchnotes/notes` if it doesn't exist
 
-- [x] Store files in `~/.speednotes/notes`
+- [x] Store files in `~/.scratchnotes/notes`
 
 - [x] List out all files if the `s` command is run with no arguments
 
